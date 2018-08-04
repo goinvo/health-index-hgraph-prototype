@@ -11,12 +11,15 @@ export function load(callback) {
         response => {
           const data = response.result.values;
           const metrics = data.map(metric => ({
-            name: metric[0],
-            min: metric[1],
-            max: metric[2],
-            healthyMin: metric[3],
-            healthyMax: metric[4],
-            value: metric[5]
+            id: metric[0],
+            label: metric[0],
+            absoluteMin: parseInt(metric[1], 10),
+            absoluteMax: parseInt(metric[2], 10),
+            healthyMin: parseInt(metric[3], 10),
+            healthyMax: parseInt(metric[4], 10),
+            value: parseInt(metric[5], 10),
+            unitLabel: "",
+            weight: parseInt(metric[6], 10)
           })) || [];
           callback({
             metrics

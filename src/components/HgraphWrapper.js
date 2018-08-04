@@ -3,12 +3,15 @@ import React, { Component } from 'react';
 import config from "../config";
 import { load } from "../helpers/spreadsheet";
 
+import HGraph, { calculateHealthScore } from 'hgraph-react';
+
 class HgraphWrapper extends Component {
   constructor() {
     super();
 
     this.state = {
       metrics: [],
+      score: 0,
       error: null
     };
   }
@@ -19,46 +22,43 @@ class HgraphWrapper extends Component {
   }
 
   initClient = () => {
-    // 2. Initialize the JavaScript client library.
     window.gapi.client
       .init({
         apiKey: config.apiKey,
-        // Your API key will be automatically added to the Discovery Document URLs.
         discoveryDocs: config.discoveryDocs
       })
       .then(() => {
-      // 3. Initialize and make the API request.
-      load(this.onLoad);
-    });
+        load(this.onLoad);
+      });
   }
 
   onLoad = (data, error) => {
     if (data) {
       const metrics = data.metrics;
-      this.setState({ metrics });
+      this.setState({
+        metrics,
+        score: parseInt(calculateHealthScore(metrics), 10)
+      });
     } else {
       this.setState({ error });
     }
   }
 
   render() {
-    const { metrics, error } = this.state;
-    if (error) {
+    if (this.state.error) {
       return <div>{this.state.error.message}</div>;
     }
     return (
-      <ul>
-        {metrics.map((metric, i) => (
-          <li key={metric.name}>
-            {metric.name}
-            {metric.min}
-            {metric.max}
-            {metric.healthyMin}
-            {metric.healthyMax}
-            {metric.value}
-          </li>
-        ))}
-      </ul>
+      <div>
+        <HGraph
+          data={ this.state.metrics }
+          score={ this.state.score }
+          width={ 600 }
+          height={ 600 }
+          fontSize={ 16 }
+          pointRadius={ 10 }
+          scoreFontSize={ 120 } />
+      </div>
     );
   }
 }
