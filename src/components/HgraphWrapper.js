@@ -62,7 +62,7 @@ class HgraphWrapper extends Component {
           fontSize={ 16 }
           pointRadius={ 10 }
           scoreFontSize={ 120 } />
-        <button class="btn" onClick={ this.refresh }>Refresh data</button>
+        <button className="btn" onClick={ this.refresh }>Refresh data</button>
       </div>
     );
   }

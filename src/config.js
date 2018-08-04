@@ -1,5 +1,5 @@
 export default {
-  apiKey: "AIzaSyBR4ZjihxvnmkEt_3VAbbvGI5fCxRTq1J8",
+  apiKey: process.env.REACT_APP_GOOGLE_API_KEY,
   discoveryDocs:
     ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
   spreadsheetId: "17O2UdSKJgOcKeoFapqqgbPDzvhl0SugpIoi4EnZwyno"
