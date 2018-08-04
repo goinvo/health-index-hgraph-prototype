@@ -44,6 +44,10 @@ class HgraphWrapper extends Component {
     }
   }
 
+  refresh = () => {
+    load(this.onLoad);
+  }
+
   render() {
     if (this.state.error) {
       return <div>{this.state.error.message}</div>;
@@ -58,6 +62,7 @@ class HgraphWrapper extends Component {
           fontSize={ 16 }
           pointRadius={ 10 }
           scoreFontSize={ 120 } />
+        <button class="btn" onClick={ this.refresh }>Refresh data</button>
       </div>
     );
   }

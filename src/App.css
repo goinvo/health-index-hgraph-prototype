@@ -1,3 +1,8 @@
+html,
+body {
+  font-size: 16px;
+}
+
 .App {
   text-align: center;
 }
@@ -25,4 +30,24 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+.btn {
+  padding: 10px;
+  border: 1px solid #AAA;
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: #FAFAFA;
+  cursor: pointer;
+  box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.1);
+}
+.btn:hover {
+  background-color: #EAEAEA;
+}
+.btn:focus,
+.btn:active {
+  outline: none;
+}
+.btn:active {
+  box-shadow: none;
 }
